@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  #root {
+    @apply h-full;
+  }
+
+  html,
+  body {
+    @apply h-full;
+    @apply select-none;
+    @apply bg-neutral-800;
+    @apply font-mono antialiased text-neutral-200;
+    @apply overflow-hidden;
+  }
+}
