@@ -1,12 +1,13 @@
 import { cn, formatDate } from "@renderer/utils"
-import { documentID } from "@shared/models"
+import { NotesDocument } from "@shared/models"
 import { ComponentProps } from 'react'
 
-export type NotePreviewProps = documentID & {
+export type NotePreviewProps = NotesDocument & {
     isActive?: boolean
 } & ComponentProps<'div'>
 
 export const NotePreview = ({
+    documentID,
     title,
     content,
     lastModified,
@@ -19,7 +20,7 @@ export const NotePreview = ({
         <div
             className={cn('p-3 mt-4 cursor-pointer rounded-full transition-colors duration-300',
                 {
-                    'bg-stone-600': isActive,
+                    'bg-stone-500': isActive,
                     'bg-stone-700': !isActive,
                     'hover:bg-stone-500': !isActive
                 },

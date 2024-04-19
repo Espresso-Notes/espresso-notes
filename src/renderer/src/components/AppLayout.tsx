@@ -29,7 +29,7 @@ Content.displayName = 'Content'
 
 export const FormatControls = ({ className, children, ...props }: ComponentProps<'aside'>) => {
     return (
-        <aside className={twMerge('w-10 p-2')} {...props}>
+        <aside className={twMerge('p-2')} {...props}>
             {children}
         </aside>
     )

@@ -7,5 +7,8 @@
   "editor.wordWrap": "on",
   "markdownlint.config": {
     "MD041": false
-  }
+  },
+  "css.customData": [
+    ".vscode/tailwind.json"
+  ]
 }

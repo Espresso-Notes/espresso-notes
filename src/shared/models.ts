@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
-export type documentID = {
+export type NotesDocument = {
+  documentID: string
   title: string
+  author: string
   lastModified: number
 }
 
-export type noteContent = string
+export type Content = string
