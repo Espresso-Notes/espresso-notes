@@ -2,9 +2,9 @@ import { BlockTypeSelect, BoldItalicUnderlineToggles, CodeToggle, InsertImage, M
 import { useMarkdownEditor } from "@renderer/hooks/useMarkdownEditor"
 
 export const MarkdownEditor = () => {
-    const { editorRef, selectedNote, handleAutoSave } = useMarkdownEditor()
+    const { editorRef, selectedNote, handleAutoSave, handleSwitch } = useMarkdownEditor()
 
-    if(!selectedNote) return null
+    if (!selectedNote) return null
 
     return (
         <MDXEditor
@@ -12,6 +12,7 @@ export const MarkdownEditor = () => {
             key={selectedNote.title}
             markdown={selectedNote.content}
             onChange={handleAutoSave}
+            onBlur={handleSwitch}
             plugins={[
                 codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
                 codeMirrorPlugin({
