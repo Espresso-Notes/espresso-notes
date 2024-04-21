@@ -1,7 +1,7 @@
-import { BlockTypeSelect, BoldItalicUnderlineToggles, CodeToggle, InsertImage, MDXEditor, UndoRedo, codeBlockPlugin, codeMirrorPlugin, headingsPlugin, imagePlugin, listsPlugin, markdownShortcutPlugin, quotePlugin, toolbarPlugin } from "@mdxeditor/editor"
+import { BlockTypeSelect, BoldItalicUnderlineToggles, CodeToggle, InsertCodeBlock, InsertImage, MDXEditor, UndoRedo, codeBlockPlugin, codeMirrorPlugin, headingsPlugin, imagePlugin, listsPlugin, markdownShortcutPlugin, quotePlugin, toolbarPlugin } from "@mdxeditor/editor"
 import { useMarkdownEditor } from "@renderer/hooks/useMarkdownEditor"
 
-export const MarkdownEditor = () => {
+export const MarkdownBlock = () => {
     const { editorRef, selectedNote, handleAutoSave, handleSwitch } = useMarkdownEditor()
 
     if (!selectedNote) return null
@@ -14,32 +14,47 @@ export const MarkdownEditor = () => {
             onChange={handleAutoSave}
             onBlur={handleSwitch}
             plugins={[
-                codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
-                codeMirrorPlugin({
-                    codeBlockLanguages: {
-                        js: 'JavaScript',
-                        css: 'CSS'
-                    }
-                }),
                 headingsPlugin(),
                 imagePlugin(),
                 listsPlugin(),
                 markdownShortcutPlugin(),
-                quotePlugin(),
-                toolbarPlugin({
-                    toolbarContents: () => (
-                        <>
-                            {' '}
-                            <UndoRedo />
-                            <InsertImage />
-                            <BlockTypeSelect />
-                            <BoldItalicUnderlineToggles />
-                            <CodeToggle />
-                        </>
-                    )
-                })
+                quotePlugin()
             ]}
             contentEditableClassName="outline-none min-h-screen max-w-none text-lg p-4 caret-stone-100 prose prose-invert prose-p:my-3 prose-p:leading-relaxed prose-headings:my-4 prose-blockquote:my-4 prose-ul:my-2 prose-li:my-0 prose-code:px-1 prose-code:text-red-500 prose-code:before:content-[''] prose-code:after:content-['']"
+        />
+    )
+}
+
+export const CodeBlock = () => {
+    const { editorRef, selectedNote, handleAutoSave, handleSwitch } = useMarkdownEditor()
+
+    if (!selectedNote) return null
+
+    return (
+        < MDXEditor
+            markdown={selectedNote.markdownBlock}
+            plugins={
+                [
+                    codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
+                    codeMirrorPlugin({
+                        codeBlockLanguages: {
+                            js: 'JavaScript',
+                            css: 'CSS'
+                        }
+                    })
+                ]}
+        />
+    )
+}
+
+export const LatexBlock = () => {
+    const { editorRef, selectedNote, handleAutoSave, handleSwitch } = useMarkdownEditor()
+
+    if (!selectedNote) return null
+
+    return (
+        < MDXEditor
+            markdown={selectedNote.latexBlock}
         />
     )
 }

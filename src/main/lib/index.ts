@@ -20,17 +20,17 @@ export const getNotes: GetNotes = async () => {
         withFileTypes: false
     })
 
-    const notes = notesFileNames.filter((fileName) => fileName.endsWith('html'))
+    const notes = notesFileNames.filter((fileName) => fileName.endsWith('json'))
 
     return Promise.all(notes.map(getNoteInfoFromFilename))
 }
 
 export const getNoteInfoFromFilename = async (filename: string): Promise<NotesDocument> => {
-    const fileStats = await stat(`${getRootDir}\\${filename}`)
+    const fileStats = await stat(`${getRootDir()}\\${filename}`)
 
     return {
         documentID: '',
-        title: filename.replace(/\.html$/, ''),
+        title: filename.replace(/\.json$/, ''),
         author: `${homedir()}`,
         lastModified: fileStats.mtimeMs
     }
@@ -40,14 +40,14 @@ export const readNote: ReadNote = async (filename) => {
     const rootDir = getRootDir()
 
     console.info(`Reading from ${filename}`)
-    return readFile(`${rootDir}/${filename}.html`, { encoding: fileEncoding })
+    return readFile(`${rootDir}/${filename}.json`, { encoding: fileEncoding })
 }
 
 export const writeNote: WriteNote = async (filename, content) => {
     const rootDir = getRootDir()
 
     console.info(`Writing to ${filename}`)
-    return writeFile(`${rootDir}/${filename}.html`, content, { encoding: fileEncoding })
+    return writeFile(`${rootDir}/${filename}.json`, content, { encoding: fileEncoding })
 }
 
 export const createNote: CreateNote = async () => {
@@ -57,14 +57,14 @@ export const createNote: CreateNote = async () => {
 
     const { filePath, canceled } = await dialog.showSaveDialog({
         title: 'New Document',
-        defaultPath: `${rootDir}/NewDocument.html`,
+        defaultPath: `${rootDir}/NewDocument.json`,
         buttonLabel: 'Confirm',
         properties: [
             'showOverwriteConfirmation'
         ],
         showsTagField: false,
         filters: [
-            { name: 'html', extensions: ['html'] }
+            { name: 'json', extensions: ['json'] }
         ]
 
     })
@@ -112,6 +112,6 @@ export const deleteNote: DeleteNote = async (filename) => {
     }
 
     console.info(`Deleting ${filename}`)
-    await remove(`${rootDir}\\${filename}.html`)
+    await remove(`${rootDir}\\${filename}.json`)
     return true
 }

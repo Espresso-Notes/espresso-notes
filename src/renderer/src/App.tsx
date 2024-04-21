@@ -1,4 +1,4 @@
-import { ActionButtonsRow, Content, MarkdownEditor, NotePreviewList, RootLayout, Sidebar } from '@/components'
+import { ActionButtonsRow, Content, MarkdownBlock, NotePreviewList, RootLayout, Sidebar } from '@/components'
 
 function App() {
   return (
@@ -9,9 +9,10 @@ function App() {
       </Sidebar>
 
       <Content className="border-l-2 border-l-neutral-600 bg-neutral-900 p-2">
-        <MarkdownEditor></MarkdownEditor>
+        { /*  */}
+        <MarkdownBlock></MarkdownBlock>
       </Content>
-    </RootLayout>
+    </RootLayout >
   )
 }
 
